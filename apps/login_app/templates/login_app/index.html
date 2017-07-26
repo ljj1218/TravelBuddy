@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Register and Login</title>
+    </head>
+    <body>
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                    <p style='color:red'>{{message}}</p>
+                {% endif %}
+                {% if message.tags == 'success' %}
+                    <p style='color:green'>{{message}}</p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <p>Register</p>
+        <form action="/register" method="POST">
+            {% csrf_token %}
+            <input type="text" name="name" placeholder="Enter your Name"><br>
+            <input type="text" name="username" placeholder="Enter your Username"><br>
+            <input type="text" name="password" placeholder="Enter your password"><br>
+            <p style="font-size: 9pt">*Password should be at least 8 characters</p>
+            <input type="text" name="c_password" placeholder="Confirm your password"><br>
+            <input type="submit" value="Register"><br>
+        </form>
+        <p>Login</p>
+        <form action="/login" method="POST">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Enter your Username"><br>
+            <input type="text" name="password" placeholder="Enter your password"><br>
+            <input type="submit" value="Login"><br>
+        </form>
+    </body>
+  </html>
+
+  

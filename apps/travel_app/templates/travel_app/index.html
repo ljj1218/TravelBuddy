@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Home</title>
+    </head>
+    <body>
+        <p>Hello, {{request.session.username}}!</p>
+        <a href="/logout">Logout</a>
+        <p>Your Trip Schedules</p>
+        <table border="1">
+            <tr>
+                <th>Destination</th>
+                <th>Travel Start Data</th>
+                <th>Travel End Data</th>
+                <th>Plan</th>
+            </tr>
+            {% for travel in travels%}
+                {% if travel.planedby.id == request.session.user_id %}
+                <tr>
+                    <td>{{travel.destination}}</td>
+                    <td>{{travel.datefrom}}</td>
+                    <td>{{travel.dateend}}</td>
+                    <td>{{travel.plan}}</td>
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+        <a href="/travels/addform">Add Travel Plan</a>
+        <p>Other User's Travel Plan</p>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>Destination</th>
+                <th>Travel Start Data</th>
+                <th>Travel End Data</th>
+                <th>Do you want to join?</th>
+            </tr>
+            {% for item in others %}
+            <tr>
+                <td>{{item.planedby.name}}</td>
+                <td><a href="/travels/destination/{{item.id}}">{{item.destination}}</a></td>
+                <td>{{item.datefrom}}</td>
+                <td>{{item.dateend}}</td>
+                <td><a href="">Join</a></td>
+            <tr>
+            {% endfor %}
+        </table>
+    </body>
+  </html>

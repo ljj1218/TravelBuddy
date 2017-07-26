@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <meta charset="utf-8">
+      <title>Home</title>
+    </head>
+    <body>
+      <a href="/travels">Home</a>
+      <a href="/logout">Logout</a>
+      {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                    <p style='color:red'>{{message}}</p>
+                {% endif %}
+                {% if message.tags == 'success' %}
+                    <p style='color:green'>{{message}}</p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+      <p>Add a Trip</p>
+      <form action="/travels/add" method="POST">
+          {% csrf_token %}
+          <input type="text" name="destination" placeholder="Enter your Destination"><br>
+          <input type="text" name="plan" placeholder="Enter the description"><br>
+          Travel from:<br>
+          <input type="date" name="datefrom" placeholder="Travel data from:"><br>
+          Travel to:<br>
+          <input type="date" name="dateend" placeholder="Travel data to:"><br>
+          <input type="submit" value="Add"><br>
+      </form>
+    </body>
+  </html>
+        
